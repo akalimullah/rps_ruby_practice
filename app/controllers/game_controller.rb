@@ -1,24 +1,27 @@
 class GameController < ApplicationController
   def rps
     @user_move = params[:the_move]
+    moves = ["rock","paper","scissors"]
 
-    # ===============================================================
-    # Your code goes below.
-    # The move the user chose is in the variable @user_move.
-    # ===============================================================
+    computer_move_index = rand(3)
 
-    # Your logic here
+    computer_move = moves[computer_move_index]
 
-    # In the end, make sure you assign the correct values to the
-    #   following two variables:
+    user_move = params[:the_move]
 
-    @computer_move = "Replace this string with the correct value."
+    if (user_move == "rock" && computer_move == "scissors")
+    || (user_move == "paper" && computer_move == "rock")
+    || (user_move == "scissors" && computer_move == "paper")
+      result = "won"
+    elsif (user_move == computer_move)
+      result = "tied"
+    else
+      result = "lost"
+    end
 
-    @result = "Replace this string with the correct value."
+    @computer_move = computer_move
 
-    # ===============================================================
-    # Your code goes above.
-    # ===============================================================
+    @result = result
 
     render("rps.html.erb")
   end
